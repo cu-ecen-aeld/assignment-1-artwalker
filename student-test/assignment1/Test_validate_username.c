@@ -18,5 +18,17 @@ void test_validate_my_username()
      * TODO: Replace the line below with your code here as described above to verify your /conf/username.txt 
      * config file and my_username() functions are setup properly
      */
-    TEST_ASSERT_TRUE_MESSAGE(false,"AESD students, please fix me!");
+    //TEST_ASSERT_TRUE_MESSAGE(false,"AESD students, please fix me!");
+    // 获取硬编码的用户名
+    const char *hard_coded_username = my_username();
+
+    // 从配置文件中读取用户名
+    char *username_from_file = malloc_username_from_conf_file();
+
+    // 比较两个字符串是否相同，并打印一个消息如果它们不匹配
+    TEST_ASSERT_EQUAL_STRING_MESSAGE(hard_coded_username, username_from_file, 
+        "The username from conf file does not match the hard-coded username.");
+
+    // 记得释放动态分配的内存
+    free(username_from_file); 
 }
