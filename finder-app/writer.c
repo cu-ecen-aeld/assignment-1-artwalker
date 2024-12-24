@@ -1,3 +1,4 @@
+// This program run in finder-test.sh, which uses the makefile
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,7 +6,7 @@
 
 void log_message(int priority, const char *message)
 {
-    openlog("writer", LOG_PID | LOG_CONS, LOG_USER);
+    openlog("IamNotWriter", LOG_PID | LOG_CONS, LOG_USER);
     syslog(priority, "%s", message);
     closelog();
 }
