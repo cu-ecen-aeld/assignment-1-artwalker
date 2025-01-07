@@ -6,7 +6,7 @@
 
 void log_message(int priority, const char *message)
 {
-    openlog("IamNotWriter", LOG_PID | LOG_CONS, LOG_USER);
+    openlog("Writer", LOG_PID | LOG_CONS, LOG_USER);
     syslog(priority, "%s", message);
     closelog();
 }
