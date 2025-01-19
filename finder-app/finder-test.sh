@@ -8,7 +8,8 @@ set -u
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
-username=$(cat conf/username.txt)
+#username=$(cat conf/username.txt)
+username=$(cat /home/xinxingwang/Projects/Coursera/13_LinuxSystemProgramming/assignment-4-artwalker/conf/username.txt)
 
 if [ $# -lt 3 ]
 then
@@ -33,7 +34,8 @@ rm -rf "${WRITEDIR}"
 
 # create $WRITEDIR if not assignment1
 # assignment=$(cat ../conf/assignment.txt)
-assignment=$(cat conf/assignment.txt)
+# assignment=$(cat conf/assignment.txt)
+assignment=$(cat /home/xinxingwang/Projects/Coursera/13_LinuxSystemProgramming/assignment-4-artwalker/conf/assignment.txt)
 
 if [ $assignment != 'assignment1' ]
 then
@@ -47,7 +49,7 @@ then
     fi
 fi
 
-echo "Removing the old writer utility and compiling as a native application"
+# echo "Removing the old writer utility and compiling as a native application"
 
 # Clean any previous build artifacts
 #make clean
@@ -57,10 +59,12 @@ echo "Removing the old writer utility and compiling as a native application"
 
 for i in $(seq 1 $NUMFILES)
 do
-    ./writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+    writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
-OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
+touch /tmp/assignment4-result.txt
+OUTPUTSTRING=$(finder.sh "$WRITEDIR" "$WRITESTR")
+finder.sh "$WRITEDIR" "$WRITESTR" > /tmp/assignment4-result.txt
 
 # remove temporary directories
 rm -rf /tmp/aeld-data
