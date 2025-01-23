@@ -1,7 +1,5 @@
 CC = $(CROSS_COMPILE)gcc
 CFLAGS = -Wall -Wextra -Werror
-CC = $(CROSS_COMPILE)gcc
-CFLAGS = -Wall -Wextra -Werror
 TARGET = writer
 
 .PHONY: all clean
