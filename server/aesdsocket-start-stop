@@ -1,6 +1,5 @@
 #！/bish/sh
 
-DAEMON_PATH="/home/xinxingwang/Projects/Coursera/13_LinuxSystemProgramming/assignment-1-artwalker/server/aesdsocket"
 DAEMON_OPTS="-d"
 DAEMON_NAME="aesdsocket"
 
@@ -18,7 +17,7 @@ log_end_msg() {
 
 do_start() {
     log_daemon_msg "Starting system $DAEMON_NAME daemon"
-    start-stop-daemon --start --quiet --name $DAEMON_NAME --exec $DAEMON_PATH -- $DAEMON_OPTS
+    start-stop-daemon --start --quiet --name $DAEMON_NAME --exec $DAEMON_NAME -- $DAEMON_OPTS
     log_end_msg $?
 }
 
