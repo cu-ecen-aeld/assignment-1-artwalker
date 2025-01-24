@@ -6,7 +6,17 @@ DAEMON_NAME="aesdsocket"
 PIDFILE="/var/run/$DAEMON_NAME.pid"
 LOGFILE="/var/log/$DAEMON_NAME.log"
 
-. /lib/lsb/init-functions
+log_daemon_msg() {
+    echo "$1"
+}
+
+log_end_msg() {
+    if [ "$1" -eq 0 ]; then
+        echo "OK"
+    else
+        echo "FAIL"
+    fi
+}
 
 do_start() {
     log_daemon_msg "Starting system $DAEMON_NAME daemon"
@@ -31,11 +41,8 @@ case "$1" in
         do_stop
         do_start
         ;;
-    status)
-        status_of_proc -p $PIDFILE $DAEMON_PATH && exit 0 || exit $?
-        ;;
     *)
-        echo "Usage: $0 {start|stop|restart|status}"
+        echo "Usage: $0 {start|stop|restart}"
         exit 1
         ;;
 esac
