@@ -3,8 +3,6 @@
 DAEMON_PATH="/home/xinxingwang/Projects/Coursera/13_LinuxSystemProgramming/assignment-1-artwalker/server/aesdsocket"
 DAEMON_OPTS="-d"
 DAEMON_NAME="aesdsocket"
-PIDFILE="/var/run/$DAEMON_NAME.pid"
-LOGFILE="/var/log/$DAEMON_NAME.log"
 
 log_daemon_msg() {
     echo "$1"
@@ -20,13 +18,13 @@ log_end_msg() {
 
 do_start() {
     log_daemon_msg "Starting system $DAEMON_NAME daemon"
-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON_NAME -- $DAEMON_OPTS
+    start-stop-daemon --start --quiet --name $DAEMON_NAME --startas $DAEMON_PATH -- $DAEMON_OPTS
     log_end_msg $?
 }
 
 do_stop() {
     log_daemon_msg "Stopping system $DAEMON_NAME damon"
-    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    start-stop-daemon --stop --quiet --name $DAEMON_NAME
     log_end_msg $?
 }
 
