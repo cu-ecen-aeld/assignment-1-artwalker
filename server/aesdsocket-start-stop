@@ -1,0 +1,43 @@
+#！/bish/sh
+
+DAEMON_PATH="/home/xinxingwang/Projects/Coursera/13_LinuxSystemProgramming/assignment-1-artwalker/server/aesdsocket"
+DAEMON_OPTS="-d"
+DAEMON_NAME="aesdsocket"
+PIDFILE="/var/run/$DAEMON_NAME.pid"
+LOGFILE="/var/log/$DAEMON_NAME.log"
+
+. /lib/lsb/init-functions
+
+do_start() {
+    log_daemon_msg "Starting system $DAEMON_NAME daemon"
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON_NAME -- $DAEMON_OPTS
+    log_end_msg $?
+}
+
+do_stop() {
+    log_daemon_msg "Stopping system $DAEMON_NAME damon"
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    log_end_msg $?
+}
+
+case "$1" in
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    restart)
+        do_stop
+        do_start
+        ;;
+    status)
+        status_of_proc -p $PIDFILE $DAEMON_PATH && exit 0 || exit $?
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit 0
