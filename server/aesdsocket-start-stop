@@ -18,7 +18,7 @@ log_end_msg() {
 
 do_start() {
     log_daemon_msg "Starting system $DAEMON_NAME daemon"
-    start-stop-daemon --start --quiet --name $DAEMON_NAME --startas $DAEMON_PATH -- $DAEMON_OPTS
+    start-stop-daemon --start --quiet --name $DAEMON_NAME --exec $DAEMON_PATH -- $DAEMON_OPTS
     log_end_msg $?
 }
 
