@@ -102,7 +102,11 @@ void *timestamp_thread(void *arg)
         int file_fd = open(FILE_PATH, O_CREAT | O_APPEND | O_RDWR, 0644);
         if (file_fd != -1)
         {
-            write(file_fd, timestamp, strlen(timestamp));
+            ssize_t ret = write(file_fd, timestamp, strlen(timestamp));
+	    if (ret == -1)
+	    {
+	    	perror("write");
+	    }
             close(file_fd);
         }
         pthread_mutex_unlock(&file_mutex);
